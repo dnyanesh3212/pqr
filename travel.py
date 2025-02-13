@@ -1,11 +1,11 @@
 from typing import TypedDict, Annotated, List
 import tkinter as tk
 from tkinter import messagebox, scrolledtext
-from google.cloud import generativeai
+from google.generativeai import configure, GenerativeModel
 
 # Configure Gemini API (Replace with your own API key)
-generativeai.configure(api_key="AIzaSyBT8lZFtzRcEnbHQT6amLdZVKIuJYSHZ-o")
-gemini_model = generativeai.GenerativeModel("gemini-2.0-flash")
+configure(api_key="AIzaSyBT8lZFtzRcEnbHQT6amLdZVKIuJYSHZ-o")
+gemini_model = GenerativeModel("gemini-2.0-flash")
 
 class PlannerState(TypedDict):
     messages: Annotated[List[str], "the messages in the conversation"]
