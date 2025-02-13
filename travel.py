@@ -83,32 +83,47 @@ def create_ui():
 
     root = tk.Tk()
     root.title("🌍 AI Travel Planner")
-    root.geometry("1920x1080")
-    root.configure(bg="#f0f8ff")
+    root.geometry("800x600")  # Adjusted for better fit on screens
+    root.configure(bg="#E6F7FF")  # Light blue background for a fresh look
 
-    tk.Label(root, text="Enter City:", font=("Arial", 14, "bold"), bg="#f0f8ff", fg="#333").pack(pady=5)
-    city_entry = tk.Entry(root, font=("Arial", 12), width=30)
+    # Title Label
+    tk.Label(root, text="AI Travel Planner", font=("Helvetica", 20, "bold"), bg="#E6F7FF", fg="#0047AB").pack(pady=20)
+
+    # City Input
+    tk.Label(root, text="Enter City:", font=("Arial", 14), bg="#E6F7FF", fg="#333").pack(pady=5)
+    city_entry = tk.Entry(root, font=("Arial", 12), width=30, borderwidth=2, relief="solid", fg="#333")
     city_entry.pack(pady=5)
 
-    tk.Label(root, text="Enter Number of Days:", font=("Arial", 14, "bold"), bg="#f0f8ff", fg="#333").pack(pady=5)
-    days_entry = tk.Entry(root, font=("Arial", 12), width=30)
+    # Number of Days Input
+    tk.Label(root, text="Enter Number of Days:", font=("Arial", 14), bg="#E6F7FF", fg="#333").pack(pady=5)
+    days_entry = tk.Entry(root, font=("Arial", 12), width=30, borderwidth=2, relief="solid", fg="#333")
     days_entry.pack(pady=5)
 
-    tk.Label(root, text="Enter Interests (comma separated):", font=("Arial", 14, "bold"), bg="#f0f8ff", fg="#333").pack(pady=5)
-    interests_entry = tk.Entry(root, font=("Arial", 12), width=30)
+    # Interests Input
+    tk.Label(root, text="Enter Interests (comma separated):", font=("Arial", 14), bg="#E6F7FF", fg="#333").pack(pady=5)
+    interests_entry = tk.Entry(root, font=("Arial", 12), width=30, borderwidth=2, relief="solid", fg="#333")
     interests_entry.pack(pady=5)
 
-    generate_btn = tk.Button(root, text="✨ Generate AI Itinerary ✨", font=("Arial", 14, "bold"), bg="#ff4500", fg="white", command=get_itinerary)
+    # Generate Button with Hover Effect
+    def on_enter(event):
+        generate_btn.config(bg="#FF6347")
+        
+    def on_leave(event):
+        generate_btn.config(bg="#FF4500")
+        
+    generate_btn = tk.Button(root, text="✨ Generate Itinerary ✨", font=("Arial", 14, "bold"), bg="#FF4500", fg="white", command=get_itinerary)
     generate_btn.pack(pady=20)
+    generate_btn.bind("<Enter>", on_enter)
+    generate_btn.bind("<Leave>", on_leave)
 
-    # Scrollable output box
-    result_text = scrolledtext.ScrolledText(root, font=("Arial", 12), height=18, width=80, state=tk.DISABLED, wrap=tk.WORD, bg="#fffafa", fg="#333")
+    # Scrollable output box with enhanced appearance
+    result_text = scrolledtext.ScrolledText(root, font=("Arial", 12), height=18, width=80, state=tk.DISABLED, wrap=tk.WORD, bg="#FFFFFF", fg="#333", borderwidth=2, relief="solid")
     result_text.pack(pady=10)
 
     # Define text tags for coloring
     result_text.tag_configure("title", font=("Arial", 16, "bold"), foreground="#0047AB")
     result_text.tag_configure("day_title", font=("Arial", 14, "bold"), foreground="#228B22")
-    result_text.tag_configure("morning", font=("Arial", 12, "bold"), foreground="#ff4500")
+    result_text.tag_configure("morning", font=("Arial", 12, "bold"), foreground="#FF4500")
     result_text.tag_configure("afternoon", font=("Arial", 12, "bold"), foreground="#D2691E")
     result_text.tag_configure("evening", font=("Arial", 12, "bold"), foreground="#800080")
     result_text.tag_configure("section_title", font=("Arial", 14, "bold"), foreground="#0047AB")
